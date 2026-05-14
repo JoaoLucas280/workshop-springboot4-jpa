@@ -1,8 +1,6 @@
 package com.projeto.spring_boot.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -13,8 +11,8 @@ import java.util.Set;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_category")
-public class Category implements Serializable {
+@Table(name = "tb_products")
+public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Setter
@@ -25,14 +23,24 @@ public class Category implements Serializable {
     @Setter
     private String name;
 
+    @Setter
+    private String description;
+
+    @Setter
+    private Double price;
+
+    @Setter
+    private String imgUrl;
+
     @Transient
-    private final Set<Product> products = new HashSet<>();
+    private final Set<Category> categories = new HashSet<>();
 
-    public Category (Long id, String name) {
-
+    public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
-
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
     }
 
     public Long getId() {
@@ -43,15 +51,27 @@ public class Category implements Serializable {
         return name;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public String getDescription() {
+        return description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(id, category.id);
+        Product product = (Product) o;
+        return Objects.equals(id, product.id);
     }
 
     @Override
