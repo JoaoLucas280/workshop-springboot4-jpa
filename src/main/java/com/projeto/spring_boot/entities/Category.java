@@ -1,5 +1,6 @@
 package com.projeto.spring_boot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +26,8 @@ public class Category implements Serializable {
     @Setter
     private String name;
 
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private final Set<Product> products = new HashSet<>();
 
     public Category (Long id, String name) {
