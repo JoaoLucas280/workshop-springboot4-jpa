@@ -1,5 +1,6 @@
 package com.projeto.spring_boot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class Payment implements Serializable {
     @Setter
     private Instant moment;
 
+    @JsonIgnore
     @Getter
     @Setter
     @OneToOne
