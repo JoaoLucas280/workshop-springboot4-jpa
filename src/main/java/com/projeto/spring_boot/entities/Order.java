@@ -3,8 +3,9 @@ package com.projeto.spring_boot.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.spring_boot.entities.enums.OrderStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -30,6 +31,11 @@ public class Order implements Serializable {
     private User client;
 
     private Integer orderStatus;
+
+    @Getter
+    @Setter
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
 
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
